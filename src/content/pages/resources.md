@@ -1,21 +1,14 @@
 ---
-title: "Resources"
-description: "Public download library"
-heroTitle: "Resource Library"
-heroText: "Download files stored in Cloudflare R2."
-
+title: Resources
+description: Public download library
+heroTitle: Resource Library
+heroText: Download files stored in Cloudflare R2.
 resources:
-  - title: "Program Guide"
-    description: "Overview document"
-    fileType: "PDF"
-    fileSize: "2.4 MB"
-    url: "https://assets.example.com/program-guide.pdf"
-
-  - title: "Application Form"
-    description: "Public application form"
-    fileType: "DOCX"
-    fileSize: "700 KB"
-    url: "https://assets.example.com/application-form.docx"
+  - title: Why Astro
+    description: Review Document
+    fileType: PDF
+    fileSize: 184 KB
+    url: https://pub-6e2a0149068b4c8388608f40f63a65c1.r2.dev/resources/1780010145198-why-astro_-_-docs.pdf
 ---
 
 # Downloads
