@@ -8,6 +8,7 @@ declare namespace App {
 }
 
 interface Env {
-  GITHUB_CLIENT_ID: string;
-  GITHUB_CLIENT_SECRET: string;
+  SECRETS: {
+    get(name: string): Promise<string | null>;
+  };
 }

@@ -19,6 +19,7 @@
     "decap-cms-app": "^3.12.2"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260528.1",
     "wrangler": "^4.95.0"
   },
   "overrides": {
