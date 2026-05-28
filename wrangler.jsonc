@@ -1,16 +1,17 @@
 {
-	"compatibility_date": "2026-05-28",
-	"compatibility_flags": ["global_fetch_strictly_public"],
-	"name": "cf-astro-demo",
+  "name": "cf-astro-demo",
+//   "main": "dist/server/entry.mjs",
+  "compatibility_date": "2026-05-28",
+  "compatibility_flags": ["global_fetch_strictly_public"],
 	"kv_namespaces": [
 		{
 			"binding": "SESSION",
 			"id": "52fcf0f837764ef3962da5a798e4e3a9"
 		}
 	],
-	"main": "@astrojs/cloudflare/entrypoints/server",
+	// "main": "@astrojs/cloudflare/entrypoints/server",
 	"assets": {
-		"directory": "./dist",
+		"directory": "./dist/client",
 		"binding": "ASSETS"
 	},
 	"observability": {

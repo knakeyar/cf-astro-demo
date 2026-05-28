@@ -2,8 +2,8 @@ backend:
   name: github
   repo: knakeyar/cf-astro-demo
   branch: main
-  base_url: https://cf-astro-demo.knakeyar.workers.dev/
-  auth_endpoint: /api/auth
+  base_url: https://cf-astro-demo.knakeyar.workers.dev
+  auth_endpoint: api/auth
 
 media_folder: "public/uploads"
 public_folder: "/uploads"

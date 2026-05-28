@@ -1,18 +1,7 @@
-// Provide a minimal PagesFunction type for environments where it's not
-// already defined, to fix "Cannot find name 'PagesFunction'".
-declare global {
-  type PagesFunction<E = unknown> = (args: { request: Request; env: E }) => Promise<Response> | Response;
-}
+import type { APIRoute } from "astro";
+import { env } from "cloudflare:workers";
 
-interface Env {
-  GITHUB_CLIENT_ID: {
-    get(): Promise<string>;
-  };
-
-  GITHUB_CLIENT_SECRET: {
-    get(): Promise<string>;
-  };
-}
+export const prerender = false;
 
 function renderBody(
   status: "success" | "error",
@@ -40,13 +29,11 @@ function renderBody(
 `;
 
   return new Response(html, {
-    headers: {
-      "Content-Type": "text/html; charset=utf-8",
-    },
+    headers: { "Content-Type": "text/html; charset=utf-8" },
   });
 }
 
-export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
+export const GET: APIRoute = async ({ request }) => {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
 
@@ -60,19 +47,22 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
   const clientId = await env.GITHUB_CLIENT_ID.get();
   const clientSecret = await env.GITHUB_CLIENT_SECRET.get();
 
-  const tokenResponse = await fetch("https://github.com/login/oauth/access_token", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-      "User-Agent": "cf-astro-demo-decap-cms",
-    },
-    body: JSON.stringify({
-      client_id: clientId,
-      client_secret: clientSecret,
-      code,
-    }),
-  });
+  const tokenResponse = await fetch(
+    "https://github.com/login/oauth/access_token",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "User-Agent": "cf-astro-demo-decap-cms",
+      },
+      body: JSON.stringify({
+        client_id: clientId,
+        client_secret: clientSecret,
+        code,
+      }),
+    }
+  );
 
   const result = await tokenResponse.json<Record<string, unknown>>();
 
