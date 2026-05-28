@@ -31,5 +31,11 @@
 	  "store_id": "0f14e3d94f114e26bfb442cb378b1385",
 	  "secret_name": "GITHUB_CLIENT_SECRET"
     }
-  ]
+  ],
+  "r2_buckets": [
+	{
+		"binding": "MEDIA_BUCKET",
+		"bucket_name": "cf-astro-decap-media"
+	}
+	]
 }

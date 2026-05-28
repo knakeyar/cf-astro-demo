@@ -9,6 +9,8 @@ declare module "cloudflare:workers" {
     interface Env {
       GITHUB_CLIENT_ID: SecretsStoreSecret;
       GITHUB_CLIENT_SECRET: SecretsStoreSecret;
+      MEDIA_BUCKET: R2Bucket;
+      R2_PUBLIC_BASE_URL: SecretsStoreSecret;
     }
   }
 }
