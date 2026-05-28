@@ -18,5 +18,17 @@
 	},
 	"secrets": {
     	"required": ["GITHUB_CLIENT_ID", "GITHUB_CLIENT_SECRET"]
-  	}
+  	},
+	"secrets_store_secrets": [
+    {
+      "binding": "GITHUB_CLIENT_ID",
+      "store_id": "0f14e3d94f114e26bfb442cb378b1385",
+      "secret_name": "GITHUB_CLIENT_ID"
+    },
+	{
+	  "binding": "GITHUB_CLIENT_SECRET",
+	  "store_id": "0f14e3d94f114e26bfb442cb378b1385",
+	  "secret_name": "GITHUB_CLIENT_SECRET"
+    }
+  ]
 }
