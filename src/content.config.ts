@@ -22,6 +22,7 @@ const pages = defineCollection({
           fileType: z.string(),
           fileSize: z.string(),
           url: z.string(),
+          thumbnail: z.string().optional(),
         })
       )
       .optional(),

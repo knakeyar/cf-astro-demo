@@ -3,6 +3,14 @@ const { resource } = Astro.props;
 ---
 
 <article class="resource-card">
+  {resource.thumbnail && (
+    <img
+      class="resource-thumb"
+      src={resource.thumbnail}
+      alt={`${resource.title} thumbnail`}
+    />
+  )}
+
   <h3>{resource.title}</h3>
   <p>{resource.description}</p>
 
