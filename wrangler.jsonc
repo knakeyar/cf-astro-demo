@@ -2,6 +2,12 @@
 	"compatibility_date": "2026-05-28",
 	"compatibility_flags": ["global_fetch_strictly_public"],
 	"name": "cd-astro-demo",
+	"kv_namespaces": [
+		{
+			"binding": "SESSION",
+			"id": "52fcf0f837764ef3962da5a798e4e3a9"
+		}
+	],
 	"main": "@astrojs/cloudflare/entrypoints/server",
 	"assets": {
 		"directory": "./dist",
@@ -9,5 +15,5 @@
 	},
 	"observability": {
 		"enabled": true
-	}
+	},
 }
