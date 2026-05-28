@@ -30,11 +30,12 @@ export const POST: APIRoute = async ({ request }) => {
   const safeName = sanitizeFileName(file.name);
   const key = `${category}/${Date.now()}-${safeName}`;
 
-  await env.MEDIA_BUCKET.put(key, file.stream(), {
+    await env.MEDIA_BUCKET.put(key, file.stream(), {
     httpMetadata: {
-      contentType: file.type || "application/octet-stream",
+        contentType: file.type || "application/octet-stream",
+        contentDisposition: `attachment; filename="${safeName}"`,
     },
-  });
+    });
 
   const publicBaseUrl = await env.R2_PUBLIC_BASE_URL.get();
 
