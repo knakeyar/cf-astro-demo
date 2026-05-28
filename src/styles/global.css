@@ -1,0 +1,79 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #111827;
+  background: #f9fafb;
+}
+
+body {
+  margin: 0;
+}
+
+.site-header {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: #111827;
+}
+
+.site-header a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.hero {
+  padding: 4rem 2rem;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.hero h1 {
+  max-width: 900px;
+  margin: 0 auto 1rem;
+  font-size: 3rem;
+}
+
+.hero p {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 1.25rem;
+  color: #4b5563;
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  line-height: 1.7;
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.resource-card {
+  padding: 1.5rem;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+}
+
+.resource-meta {
+  display: flex;
+  gap: 1rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.7rem 1rem;
+  background: #111827;
+  color: white;
+  border-radius: 0.5rem;
+  text-decoration: none;
+}

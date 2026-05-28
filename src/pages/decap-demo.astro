@@ -1,0 +1,16 @@
+---
+import { getEntry, render } from "astro:content";
+import PageLayout from "../layouts/PageLayout.astro";
+
+const page = await getEntry("pages", "decap-demo");
+
+if (!page) {
+  throw new Error("Decap demo page not found");
+}
+
+const { Content } = await render(page);
+---
+
+<PageLayout {...page.data}>
+  <Content />
+</PageLayout>

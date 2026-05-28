@@ -1,0 +1,68 @@
+backend:
+  name: github
+  repo: knakeyar/cf-astro-demo
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    folder: "src/content/pages"
+    create: false
+
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+
+      - {
+          label: "Description",
+          name: "description",
+          widget: "text"
+        }
+
+      - {
+          label: "Hero Title",
+          name: "heroTitle",
+          widget: "string"
+        }
+
+      - {
+          label: "Hero Text",
+          name: "heroText",
+          widget: "text"
+        }
+
+      - label: "Resources"
+        name: "resources"
+        widget: "list"
+        required: false
+
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+
+          - {
+              label: "Description",
+              name: "description",
+              widget: "text"
+            }
+
+          - {
+              label: "File Type",
+              name: "fileType",
+              widget: "string"
+            }
+
+          - {
+              label: "File Size",
+              name: "fileSize",
+              widget: "string"
+            }
+
+          - {
+              label: "R2 URL",
+              name: "url",
+              widget: "string"
+            }
+
+      - { label: "Body", name: "body", widget: "markdown" }

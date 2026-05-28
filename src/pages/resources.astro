@@ -1,0 +1,33 @@
+---
+import { getEntry, render } from "astro:content";
+import PageLayout from "../layouts/PageLayout.astro";
+import ResourceCard from "../components/ResourceCard.astro";
+
+const page = await getEntry("pages", "resources");
+
+if (!page) {
+  throw new Error("Resources page not found");
+}
+
+const { Content } = await render(page);
+
+type Resource = {
+  title: string;
+  description: string;
+  fileType: string;
+  fileSize: string;
+  url: string;
+};
+
+const resources: Resource[] = page.data.resources ?? [];
+---
+
+<PageLayout {...page.data}>
+  <Content />
+
+  <section class="resource-grid">
+    {resources.map((resource: Resource) => (
+      <ResourceCard resource={resource} />
+    ))}
+  </section>
+</PageLayout>

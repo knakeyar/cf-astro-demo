@@ -1,0 +1,28 @@
+---
+import "../styles/global.css";
+
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a href="/">Home</a>
+      <a href="/astro-review">Astro Review</a>
+      <a href="/decap-demo">Decap Demo</a>
+      <a href="/resources">Resources</a>
+      <a href="/admin">Admin</a>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
