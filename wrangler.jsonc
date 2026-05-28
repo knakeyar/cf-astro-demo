@@ -16,9 +16,9 @@
 	"observability": {
 		"enabled": true
 	},
-	"secrets": {
-    	"required": ["GITHUB_CLIENT_ID", "GITHUB_CLIENT_SECRET"]
-  	},
+	// "secrets": {
+    // 	"required": ["GITHUB_CLIENT_ID", "GITHUB_CLIENT_SECRET"]
+  	// },
 	"secrets_store_secrets": [
     {
       "binding": "GITHUB_CLIENT_ID",
