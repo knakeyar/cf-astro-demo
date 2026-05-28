@@ -6,7 +6,7 @@ heroText: Fast, secure, low-maintenance publishing.
 resources:
   - title: Why Astro
     fileType: PDF
-    url: https://pub-6e2a0149068b4c8388608f40f63a65c1.r2.dev/public/uploads/why-astro_-_-docs.pdf
+    url: https://pub-6e2a0149068b4c8388608f40f63a65c1.r2.dev/resources/1780010145198-why-astro_-_-docs.pdf
     fileSize: 184KB
     description: Astro docs
 ---
