@@ -1,7 +1,7 @@
 {
 	"compatibility_date": "2026-05-28",
 	"compatibility_flags": ["global_fetch_strictly_public"],
-	"name": "cd-astro-demo",
+	"name": "cf-astro-demo",
 	"kv_namespaces": [
 		{
 			"binding": "SESSION",
