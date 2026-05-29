@@ -83,3 +83,126 @@ body {
   margin-bottom: 1rem;
   object-fit: cover;
 }
+
+.full-screen {
+  min-height: calc(100vh - 64px);
+}
+
+.astro-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.astro-hero h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1;
+  margin: 0 0 1.5rem;
+}
+
+.astro-hero p {
+  font-size: 1.25rem;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  color: #7c3aed;
+  font-size: 0.85rem;
+}
+
+.image-placeholder {
+  min-height: 320px;
+  border: 2px dashed #c4b5fd;
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(135deg, #f5f3ff, #eff6ff);
+  display: grid;
+  place-items: center;
+  color: #6d28d9;
+  font-weight: 800;
+  text-align: center;
+  padding: 1rem;
+}
+
+.image-placeholder.large {
+  min-height: 520px;
+}
+
+.image-placeholder.small {
+  min-height: 180px;
+  margin-bottom: 1rem;
+}
+
+.split-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.split-section h2,
+.ownership-section h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  margin-top: 0;
+}
+
+.split-section p {
+  color: #4b5563;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.feature-grid article,
+.ownership-grid > div {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.feature-grid p,
+.ownership-grid li {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.ownership-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.ownership-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .astro-hero,
+  .split-section,
+  .feature-grid,
+  .ownership-grid {
+    grid-template-columns: 1fr;
+  }
+}
