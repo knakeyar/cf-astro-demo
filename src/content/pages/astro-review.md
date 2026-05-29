@@ -1,5 +1,5 @@
 ---
-title: Why Astro + Cloudflare
+title: Why Astro + Cloudflare + GitHub + Decap
 description: Architecture overview
 heroTitle: Modern Static Architecture
 heroText: Fast, secure, low-maintenance publishing for business teams.
