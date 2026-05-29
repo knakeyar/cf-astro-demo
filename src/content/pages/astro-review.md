@@ -3,7 +3,7 @@ title: Why Astro + Cloudflare
 description: Architecture overview
 heroTitle: Modern Static Architecture
 heroText: Fast, secure, low-maintenance publishing for business teams.
-heroImage: https://pub-6e2a0149068b4c8388608f40f63a65c1.r2.dev/images/1780072885359-astro-icon.png
+heroImage: https://pub-6e2a0149068b4c8388608f40f63a65c1.r2.dev/images/1780076777447-acgd-hero.png
 heroImageLabel: Hero Architecture Image
 sections:
   - eyebrow: Astro
