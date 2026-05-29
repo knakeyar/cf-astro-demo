@@ -12,10 +12,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     <div class="home-hero-content">
       <p class="eyebrow">Astro · Cloudflare · GitHub · Decap CMS</p>
-      <h1>Modern publishing for business teams without handing over the keys.</h1>
+      <h1>
+        Modern publishing for business teams without handing over the keys.
+      </h1>
       <p>
-        A fast public website, a simple content editor, secure GitHub-backed publishing,
-        and R2-powered media delivery — all managed through Cloudflare.
+        A fast public website, a simple content editor, secure GitHub-backed
+        publishing, and R2-powered media delivery — all managed through
+        Cloudflare.
       </p>
 
       <div class="home-actions">
@@ -28,10 +31,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <div class="browser-bar">
         <span></span><span></span><span></span>
       </div>
-      <div class="flow-card active">Business user edits content</div>
-      <div class="flow-card">Decap commits to GitHub</div>
-      <div class="flow-card">Cloudflare deploys Worker</div>
-      <div class="flow-card">R2 serves media</div>
+      <div class="flow-card is-active" data-step="0">
+        Business user edits content
+      </div>
+      <div class="flow-card" data-step="1">Decap commits to GitHub</div>
+      <div class="flow-card" data-step="2">Cloudflare deploys Worker</div>
+      <div class="flow-card" data-step="3">R2 serves media</div>
     </div>
   </section>
 
@@ -39,8 +44,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div>
       <h2>Content changes are easy. Layout changes stay controlled.</h2>
       <p>
-        Business users can update text, images, and resource links. Developers keep ownership
-        of templates, components, styling, security, and deployment.
+        Business users can update text, images, and resource links. Developers
+        keep ownership of templates, components, styling, security, and
+        deployment.
       </p>
     </div>
   </section>
@@ -49,25 +55,37 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <article>
       <span>01</span>
       <h3>Static speed</h3>
-      <p>Astro keeps the public site lightweight, fast, and optimized for content-heavy pages.</p>
+      <p>
+        Astro keeps the public site lightweight, fast, and optimized for
+        content-heavy pages.
+      </p>
     </article>
 
     <article>
       <span>02</span>
       <h3>Simple editing</h3>
-      <p>Decap CMS gives non-technical users forms instead of Git commands or code changes.</p>
+      <p>
+        Decap CMS gives non-technical users forms instead of Git commands or
+        code changes.
+      </p>
     </article>
 
     <article>
       <span>03</span>
       <h3>Media offload</h3>
-      <p>Cloudflare R2 stores PDFs, images, downloads, and other files outside the repo.</p>
+      <p>
+        Cloudflare R2 stores PDFs, images, downloads, and other files outside
+        the repo.
+      </p>
     </article>
 
     <article>
       <span>04</span>
       <h3>IT governance</h3>
-      <p>GitHub, Cloudflare, and controlled templates preserve auditability and ownership.</p>
+      <p>
+        GitHub, Cloudflare, and controlled templates preserve auditability and
+        ownership.
+      </p>
     </article>
   </section>
 
@@ -100,4 +118,30 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
     </div>
   </section>
+
+  <script>
+    const hero = document.querySelector(".home-hero") as HTMLElement | null;
+    const flowCards = Array.from(document.querySelectorAll(".flow-card"));
+
+    window.addEventListener("scroll", () => {
+      if (!hero) return;
+
+      const rect = hero.getBoundingClientRect();
+      const progress = Math.min(
+        1,
+        Math.max(0, Math.abs(rect.top) / window.innerHeight),
+      );
+
+      hero.style.setProperty("--hero-parallax-y", `${progress * 90}px`);
+
+      const activeIndex = Math.min(
+        flowCards.length - 1,
+        Math.floor(progress * flowCards.length),
+      );
+
+      flowCards.forEach((card, index) => {
+        card.classList.toggle("is-active", index === activeIndex);
+      });
+    });
+  </script>
 </BaseLayout>

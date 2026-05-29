@@ -268,7 +268,8 @@ body {
   border-radius: 999px;
   filter: blur(8px);
   opacity: 0.65;
-  animation: floatOrb 8s ease-in-out infinite alternate;
+  transform: translate3d(0, var(--hero-parallax-y, 0px), 0);
+  transition: transform 0.08s linear;
 }
 
 .orb-one {
@@ -285,17 +286,7 @@ body {
   background: #06b6d4;
   bottom: 12%;
   left: 10%;
-  animation-delay: 1.5s;
-}
-
-@keyframes floatOrb {
-  from {
-    transform: translateY(0) translateX(0) scale(1);
-  }
-
-  to {
-    transform: translateY(-32px) translateX(24px) scale(1.08);
-  }
+  transform: translate3d(0, calc(var(--hero-parallax-y, 0px) * -0.6), 0);
 }
 
 .home-actions {
@@ -356,12 +347,18 @@ body {
   background: rgba(255, 255, 255, 0.08);
   color: #e5e7eb;
   font-weight: 700;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
-.flow-card.active {
+.flow-card.is-active {
   background: linear-gradient(135deg, #7c3aed, #2563eb);
   color: white;
+  transform: translateX(-10px) scale(1.02);
 }
+
 
 .parallax-band {
   min-height: 80vh;
