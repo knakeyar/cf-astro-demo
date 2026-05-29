@@ -2,8 +2,8 @@ backend:
   name: github
   repo: knakeyar/cf-astro-demo
   branch: main
-  base_url: https://cf-astro-demo.knakeyar.workers.dev
-  auth_endpoint: api/auth
+  base_url: "https://cf-astro-demo.knakeyar.workers.dev"
+  auth_endpoint: "/api/auth"
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
@@ -11,60 +11,101 @@ public_folder: "/uploads"
 collections:
   - name: "pages"
     label: "Pages"
-    folder: "src/content/pages"
-    create: false
-
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-
-      - {
-          label: "Description",
-          name: "description",
-          widget: "text"
-        }
-
-      - {
-          label: "Hero Title",
-          name: "heroTitle",
-          widget: "string"
-        }
-
-      - {
-          label: "Hero Text",
-          name: "heroText",
-          widget: "text"
-        }
-
-      - label: "Resources"
-        name: "resources"
-        widget: "list"
-        required: false
-
+    files:
+      - label: "Astro Review"
+        name: "astro-review"
+        file: "src/content/pages/astro-review.md"
         fields:
-          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Page Title", name: "title", widget: "string" }
+          - { label: "Meta Description", name: "description", widget: "text" }
 
-          - {
-              label: "Description",
-              name: "description",
-              widget: "text"
-            }
+          - { label: "Hero Title", name: "heroTitle", widget: "string" }
+          - { label: "Hero Text", name: "heroText", widget: "text" }
+          - { label: "Hero Image URL", name: "heroImage", widget: "string", required: false }
+          - { label: "Hero Placeholder Label", name: "heroImageLabel", widget: "string", required: false }
 
-          - {
-              label: "File Type",
-              name: "fileType",
-              widget: "string"
-            }
+          - label: "Content Sections"
+            name: "sections"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+              - { label: "Section Title", name: "title", widget: "string" }
+              - { label: "Section Text", name: "text", widget: "text" }
+              - { label: "Section Image URL", name: "image", widget: "string", required: false }
+              - { label: "Section Placeholder Label", name: "imageLabel", widget: "string", required: false }
 
-          - {
-              label: "File Size",
-              name: "fileSize",
-              widget: "string"
-            }
+          - label: "Feature Cards"
+            name: "cards"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Card Title", name: "title", widget: "string" }
+              - { label: "Card Text", name: "text", widget: "text" }
+              - { label: "Card Image URL", name: "image", widget: "string", required: false }
+              - { label: "Card Placeholder Label", name: "imageLabel", widget: "string", required: false }
 
-          - {
-              label: "R2 URL",
-              name: "url",
-              widget: "string"
-            }
+      - label: "Decap CMS Demo"
+        name: "decap-demo"
+        file: "src/content/pages/decap-demo.md"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string" }
+          - { label: "Meta Description", name: "description", widget: "text" }
 
-      - { label: "Body", name: "body", widget: "markdown" }
+          - { label: "Hero Title", name: "heroTitle", widget: "string" }
+          - { label: "Hero Text", name: "heroText", widget: "text" }
+          - { label: "Hero Image URL", name: "heroImage", widget: "string", required: false }
+          - { label: "Hero Placeholder Label", name: "heroImageLabel", widget: "string", required: false }
+
+          - label: "Content Sections"
+            name: "sections"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+              - { label: "Section Title", name: "title", widget: "string" }
+              - { label: "Section Text", name: "text", widget: "text" }
+              - { label: "Section Image URL", name: "image", widget: "string", required: false }
+              - { label: "Section Placeholder Label", name: "imageLabel", widget: "string", required: false }
+
+          - label: "Feature Cards"
+            name: "cards"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Card Title", name: "title", widget: "string" }
+              - { label: "Card Text", name: "text", widget: "text" }
+              - { label: "Card Image URL", name: "image", widget: "string", required: false }
+              - { label: "Card Placeholder Label", name: "imageLabel", widget: "string", required: false }
+
+      - label: "Resources Page"
+        name: "resources"
+        file: "src/content/pages/resources.md"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string" }
+          - { label: "Meta Description", name: "description", widget: "text" }
+          - { label: "Hero Title", name: "heroTitle", widget: "string" }
+          - { label: "Hero Text", name: "heroText", widget: "text" }
+          - { label: "Hero Image URL", name: "heroImage", widget: "string", required: false }
+
+          - label: "Download Resources"
+            name: "resources"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "File Type", name: "fileType", widget: "string" }
+              - { label: "File Size", name: "fileSize", widget: "string" }
+              - { label: "R2 URL", name: "url", widget: "string" }
+              - { label: "Thumbnail URL", name: "thumbnail", widget: "string", required: false }
+
+      - label: "Landing Page"
+        name: "landing"
+        file: "src/content/pages/landing.md"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string" }
+          - { label: "Meta Description", name: "description", widget: "text" }
+          - { label: "Hero Title", name: "heroTitle", widget: "string" }
+          - { label: "Hero Text", name: "heroText", widget: "text" }
+          - { label: "Body", name: "body", widget: "markdown", required: false }
