@@ -39,12 +39,17 @@ export const POST: APIRoute = async ({ request }) => {
       },
     });
 
-    const publicBaseUrl = await env.R2_PUBLIC_BASE_URL.get();
+    const publicBaseUrl =
+      typeof env.R2_PUBLIC_BASE_URL === "string"
+        ? env.R2_PUBLIC_BASE_URL
+        : await env.R2_PUBLIC_BASE_URL?.get();
 
     if (!publicBaseUrl) {
       return Response.json(
         {
-          error: "Upload succeeded, but R2_PUBLIC_BASE_URL is missing.",
+          success: false,
+          error:
+            "R2_PUBLIC_BASE_URL binding is missing. Add it as a Workers variable or Secrets Store binding.",
           key,
         },
         { status: 500 }
