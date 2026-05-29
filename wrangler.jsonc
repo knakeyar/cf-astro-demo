@@ -32,9 +32,9 @@
 	  "secret_name": "GITHUB_CLIENT_SECRET"
     },
 	{
-	  "binding": "R2_PUBLIC_BASE_URL ",
+	  "binding": "R2_PUBLIC_BASE_URL",
 	  "store_id": "0f14e3d94f114e26bfb442cb378b1385",
-	  "secret_name": "R2_PUBLIC_BASE_URL "
+	  "secret_name": "R2_PUBLIC_BASE_URL"
     }
   ],
   "r2_buckets": [
