@@ -142,6 +142,11 @@
 
                 <button id="upload-button" type="submit">Upload to R2</button>
             </form>
+            <button class="secondary" type="button" id="refresh-media">
+                Show Existing Files
+            </button>
+
+            <div id="media-list"></div>
 
             <div id="status" class="status"></div>
         </section>
@@ -153,6 +158,8 @@
         const statusBox = document.getElementById("status");
 
         let uploadedUrl = "";
+
+
 
         form.addEventListener("submit", async (event) => {
             event.preventDefault();
@@ -178,6 +185,17 @@
 
                 uploadedUrl = data.url;
 
+
+                const fileName = data.key.split("/").pop() || "Uploaded file";
+                const fileType = (data.contentType || "file").split("/").pop().toUpperCase();
+                const fileSizeMb = `${(data.size / 1024 / 1024).toFixed(2)} MB`;
+
+                const resourceYaml = `- title: "${fileName}"
+                    description: "Uploaded resource"
+                    fileType: "${fileType}"
+                    fileSize: "${fileSizeMb}"
+                    url: "${uploadedUrl}"`;
+
                 statusBox.className = "status success";
                 statusBox.innerHTML = `
             <strong>File uploaded successfully.</strong>
@@ -190,8 +208,12 @@
 
             <div class="url-box">${uploadedUrl}</div>
 
-            <button class="secondary" type="button" id="copy-button">
-              Copy URL
+            <button class="secondary" type="button" id="copy-link-button">
+            Copy Link
+            </button>
+
+            <button class="secondary" type="button" id="copy-yaml-button">
+            Copy Resource YAML
             </button>
 
             <a class="link-button secondary" href="${uploadedUrl}" download target="_blank" rel="noopener noreferrer">
@@ -199,9 +221,14 @@
             </a>
           `;
 
-                document.getElementById("copy-button").addEventListener("click", async () => {
+                document.getElementById("copy-link-button").addEventListener("click", async () => {
                     await navigator.clipboard.writeText(uploadedUrl);
-                    document.getElementById("copy-button").textContent = "Copied!";
+                    document.getElementById("copy-link-button").textContent = "Link Copied!";
+                });
+
+                document.getElementById("copy-yaml-button").addEventListener("click", async () => {
+                    await navigator.clipboard.writeText(resourceYaml);
+                    document.getElementById("copy-yaml-button").textContent = "YAML Copied!";
                 });
 
                 form.reset();
@@ -212,6 +239,41 @@
                 button.disabled = false;
                 button.textContent = "Upload to R2";
             }
+        });
+
+        const mediaList = document.getElementById("media-list");
+
+        document.getElementById("refresh-media").addEventListener("click", async () => {
+            const response = await fetch("/api/media");
+            const data = await response.json();
+
+            mediaList.innerHTML = data.objects
+                .map(
+                    (item) => `
+        <div class="url-box">
+          <strong>${item.key}</strong><br />
+          <a href="${item.url}" target="_blank">${item.url}</a>
+          <button type="button" class="secondary copy-existing" data-url="${item.url}">
+            Copy Link
+          </button>
+          <button type="button" class="secondary copy-existing" data-url="${item.url}">
+            Copy Link
+            </button>
+
+            <button type="button" class="secondary copy-existing-yaml" data-url="${item.url}" data-key="${item.key}">
+            Copy YAML
+            </button>
+        </div>
+      `
+                )
+                .join("");
+
+            document.querySelectorAll(".copy-existing").forEach((button) => {
+                button.addEventListener("click", async () => {
+                    await navigator.clipboard.writeText(button.dataset.url);
+                    button.textContent = "Copied!";
+                });
+            });
         });
     </script>
 </body>

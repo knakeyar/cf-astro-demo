@@ -14,35 +14,57 @@ function sanitizeFileName(fileName: string) {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  const formData = await request.formData();
+  try {
+    const formData = await request.formData();
 
-  const file = formData.get("file");
-  const requestedCategory = String(formData.get("category") || "uploads");
+    const file = formData.get("file");
+    const requestedCategory = String(formData.get("category") || "resources");
 
-  if (!(file instanceof File)) {
-    return Response.json({ error: "Missing file" }, { status: 400 });
-  }
+    if (!(file instanceof File)) {
+      return Response.json({ error: "Missing file" }, { status: 400 });
+    }
 
-  const category = ALLOWED_CATEGORIES.has(requestedCategory)
-    ? requestedCategory
-    : "uploads";
+    const category = ALLOWED_CATEGORIES.has(requestedCategory)
+      ? requestedCategory
+      : "resources";
 
-  const safeName = sanitizeFileName(file.name);
-  const key = `${category}/${Date.now()}-${safeName}`;
+    const safeName = sanitizeFileName(file.name);
+    const key = `${category}/${Date.now()}-${safeName}`;
+    const contentType = file.type || "application/octet-stream";
 
     await env.MEDIA_BUCKET.put(key, file.stream(), {
-    httpMetadata: {
-        contentType: file.type || "application/octet-stream",
+      httpMetadata: {
+        contentType,
         contentDisposition: `attachment; filename="${safeName}"`,
-    },
+      },
     });
 
-  const publicBaseUrl = await env.R2_PUBLIC_BASE_URL.get();
+    const publicBaseUrl = await env.R2_PUBLIC_BASE_URL.get();
 
-  return Response.json({
-    key,
-    url: `${publicBaseUrl}/${key}`,
-    contentType: file.type || "application/octet-stream",
-    size: file.size,
-  });
+    if (!publicBaseUrl) {
+      return Response.json(
+        {
+          error: "Upload succeeded, but R2_PUBLIC_BASE_URL is missing.",
+          key,
+        },
+        { status: 500 }
+      );
+    }
+
+    return Response.json({
+      success: true,
+      key,
+      url: `${publicBaseUrl.replace(/\/$/, "")}/${key}`,
+      contentType,
+      size: file.size,
+    });
+  } catch (error) {
+    return Response.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Unknown upload error",
+      },
+      { status: 500 }
+    );
+  }
 };
