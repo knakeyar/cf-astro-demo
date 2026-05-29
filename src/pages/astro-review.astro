@@ -1,95 +1,67 @@
 ---
+import { getEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const page = await getEntry("pages", "astro-review");
+if (!page) {
+  throw new Error("Astro review page not found");
+}
+const sections = page.data.sections ?? [];
+const cards = page.data.cards ?? [];
 ---
 
-<BaseLayout
-  title="Why Astro + Decap CMS"
-  description="A modern content publishing workflow for business teams."
->
+<BaseLayout title={page.data.title} description={page.data.description}>
   <section class="astro-hero full-screen">
     <div>
-      <p class="eyebrow">Astro + Decap CMS + Cloudflare</p>
-      <h1>Modern websites where business teams own the content.</h1>
-      <p>
-        Astro gives IT a fast, secure, developer-controlled website foundation.
-        Decap CMS gives business users a simple way to update text, images, and resources.
-      </p>
+      <p class="eyebrow">Astro + Cloudflare</p>
+      <h1>{page.data.heroTitle}</h1>
+      <p>{page.data.heroText}</p>
     </div>
 
-    <div class="image-placeholder large">
-      Editable hero image placeholder
-    </div>
+    {page.data.heroImage ? (
+      <img class="showcase-image large" src={page.data.heroImage} alt={page.data.heroTitle} />
+    ) : (
+      <div class="image-placeholder large">{page.data.heroImageLabel ?? "Hero image placeholder"}</div>
+    )}
   </section>
 
-  <section class="split-section">
-    <div class="image-placeholder">
-      Content image placeholder
-    </div>
+  {sections.map((section, index) => (
+    <section class="split-section">
+      {index % 2 === 0 && (
+        section.image ? (
+          <img class="showcase-image" src={section.image} alt={section.title} />
+        ) : (
+          <div class="image-placeholder">{section.imageLabel ?? "Image placeholder"}</div>
+        )
+      )}
 
-    <div>
-      <h2>Content can change without touching layout</h2>
-      <p>
-        Business teams can update page text, resource links, and image URLs through Decap CMS.
-        Those changes are stored as Markdown content and published through GitHub.
-      </p>
-      <p>
-        Layout changes, page structure, reusable components, and styling remain controlled in
-        Astro files such as <code>.astro</code>, <code>.html</code>, and CSS.
-      </p>
-    </div>
-  </section>
+      <div>
+        {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+        <h2>{section.title}</h2>
+        <p>{section.text}</p>
+      </div>
+
+      {index % 2 !== 0 && (
+        section.image ? (
+          <img class="showcase-image" src={section.image} alt={section.title} />
+        ) : (
+          <div class="image-placeholder">{section.imageLabel ?? "Image placeholder"}</div>
+        )
+      )}
+    </section>
+  ))}
 
   <section class="feature-grid">
-    <article>
-      <div class="image-placeholder small">Image</div>
-      <h3>Content-driven</h3>
-      <p>Astro is designed for content-rich sites such as landing pages, blogs, documentation, and marketing sites.</p>
-    </article>
-
-    <article>
-      <div class="image-placeholder small">Image</div>
-      <h3>Fast by default</h3>
-      <p>Astro reduces unnecessary client-side JavaScript, which helps public pages load quickly.</p>
-    </article>
-
-    <article>
-      <div class="image-placeholder small">Image</div>
-      <h3>Server-first</h3>
-      <p>Pages can render on the server or be prebuilt, keeping the user experience fast and simple.</p>
-    </article>
-
-    <article>
-      <div class="image-placeholder small">Image</div>
-      <h3>Easy to maintain</h3>
-      <p>Business content lives in Markdown. Developer-owned layout lives in Astro components.</p>
-    </article>
-  </section>
-
-  <section class="ownership-section">
-    <h2>Clear ownership model</h2>
-
-    <div class="ownership-grid">
-      <div>
-        <h3>Business-editable</h3>
-        <ul>
-          <li>Page titles</li>
-          <li>Body text</li>
-          <li>Image URLs</li>
-          <li>R2 resource links</li>
-          <li>Download descriptions</li>
-        </ul>
-      </div>
-
-      <div>
-        <h3>Developer-owned</h3>
-        <ul>
-          <li>Page layout</li>
-          <li>Components</li>
-          <li>Navigation</li>
-          <li>Design system</li>
-          <li>Security and deployment</li>
-        </ul>
-      </div>
-    </div>
+    {cards.map((card) => (
+      <article>
+        {card.image ? (
+          <img class="showcase-image small" src={card.image} alt={card.title} />
+        ) : (
+          <div class="image-placeholder small">{card.imageLabel ?? "Image"}</div>
+        )}
+        <h3>{card.title}</h3>
+        <p>{card.text}</p>
+      </article>
+    ))}
   </section>
 </BaseLayout>

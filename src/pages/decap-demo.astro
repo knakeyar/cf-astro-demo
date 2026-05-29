@@ -1,16 +1,67 @@
 ---
-import { getEntry, render } from "astro:content";
-import PageLayout from "../layouts/PageLayout.astro";
+import { getEntry } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const page = await getEntry("pages", "decap-demo");
-
 if (!page) {
   throw new Error("Decap demo page not found");
 }
-
-const { Content } = await render(page);
+const sections = page.data.sections ?? [];
+const cards = page.data.cards ?? [];
 ---
 
-<PageLayout {...page.data}>
-  <Content />
-</PageLayout>
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <section class="decap-hero full-screen">
+    <div>
+      <p class="eyebrow">Decap CMS</p>
+      <h1>{page.data.heroTitle}</h1>
+      <p>{page.data.heroText}</p>
+    </div>
+
+    {page.data.heroImage ? (
+      <img class="showcase-image large" src={page.data.heroImage} alt={page.data.heroTitle} />
+    ) : (
+      <div class="image-placeholder large">{page.data.heroImageLabel ?? "CMS image placeholder"}</div>
+    )}
+  </section>
+
+  {sections.map((section, index) => (
+    <section class="split-section">
+      {index % 2 === 0 && (
+        section.image ? (
+          <img class="showcase-image" src={section.image} alt={section.title} />
+        ) : (
+          <div class="image-placeholder">{section.imageLabel ?? "Image placeholder"}</div>
+        )
+      )}
+
+      <div>
+        {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+        <h2>{section.title}</h2>
+        <p>{section.text}</p>
+      </div>
+
+      {index % 2 !== 0 && (
+        section.image ? (
+          <img class="showcase-image" src={section.image} alt={section.title} />
+        ) : (
+          <div class="image-placeholder">{section.imageLabel ?? "Image placeholder"}</div>
+        )
+      )}
+    </section>
+  ))}
+
+  <section class="feature-grid">
+    {cards.map((card) => (
+      <article>
+        {card.image ? (
+          <img class="showcase-image small" src={card.image} alt={card.title} />
+        ) : (
+          <div class="image-placeholder small">{card.imageLabel ?? "Image"}</div>
+        )}
+        <h3>{card.title}</h3>
+        <p>{card.text}</p>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

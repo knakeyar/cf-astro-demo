@@ -11,24 +11,71 @@ public_folder: "/uploads"
 collections:
   - name: "pages"
     label: "Pages"
-    folder: "src/content/pages"
-    create: false
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Hero Title", name: "heroTitle", widget: "string" }
-      - { label: "Hero Text", name: "heroText", widget: "text" }
+    files:
+      - label: "Landing Page"
+        name: "landing"
+        file: "src/content/pages/landing.md"
+        fields: &page_fields
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+          - { label: "Hero Title", name: "heroTitle", widget: "string" }
+          - { label: "Hero Text", name: "heroText", widget: "text" }
+          - { label: "Hero Image URL", name: "heroImage", widget: "string", required: false }
+          - { label: "Hero Image Label", name: "heroImageLabel", widget: "string", required: false }
 
-      - label: "Resources"
+          - label: "Sections"
+            name: "sections"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+              - { label: "Section Title", name: "title", widget: "string" }
+              - { label: "Section Text", name: "text", widget: "text" }
+              - { label: "Image URL", name: "image", widget: "string", required: false }
+              - { label: "Image Label", name: "imageLabel", widget: "string", required: false }
+
+          - label: "Cards"
+            name: "cards"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Card Title", name: "title", widget: "string" }
+              - { label: "Card Text", name: "text", widget: "text" }
+              - { label: "Image URL", name: "image", widget: "string", required: false }
+              - { label: "Image Label", name: "imageLabel", widget: "string", required: false }
+
+          - { label: "Body", name: "body", widget: "markdown", required: false }
+
+      - label: "Astro Review"
+        name: "astro-review"
+        file: "src/content/pages/astro-review.md"
+        fields: *page_fields
+
+      - label: "Decap CMS Demo"
+        name: "decap-demo"
+        file: "src/content/pages/decap-demo.md"
+        fields: *page_fields
+
+      - label: "Resources Page"
         name: "resources"
-        widget: "list"
-        required: false
+        file: "src/content/pages/resources.md"
         fields:
           - { label: "Title", name: "title", widget: "string" }
           - { label: "Description", name: "description", widget: "text" }
-          - { label: "File Type", name: "fileType", widget: "string" }
-          - { label: "File Size", name: "fileSize", widget: "string" }
-          - { label: "R2 URL", name: "url", widget: "string" }
-          - { label: "Thumbnail URL", name: "thumbnail", widget: "string", required: false }
+          - { label: "Hero Title", name: "heroTitle", widget: "string" }
+          - { label: "Hero Text", name: "heroText", widget: "text" }
+          - { label: "Hero Image Label", name: "heroImageLabel", widget: "string", required: false }
 
-      - { label: "Body", name: "body", widget: "markdown" }
+          - label: "Resources"
+            name: "resources"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "File Type", name: "fileType", widget: "string" }
+              - { label: "File Size", name: "fileSize", widget: "string" }
+              - { label: "R2 URL", name: "url", widget: "string" }
+              - { label: "Thumbnail URL", name: "thumbnail", widget: "string", required: false }
+
+          - { label: "Body", name: "body", widget: "markdown", required: false }

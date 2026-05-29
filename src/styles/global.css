@@ -206,3 +206,23 @@ body {
     grid-template-columns: 1fr;
   }
 }
+.showcase-image {
+  width: 100%;
+  min-height: 320px;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 1.25rem;
+  border: 1px solid #e5e7eb;
+  background: white;
+}
+
+.showcase-image.large {
+  min-height: 520px;
+  max-height: 620px;
+}
+
+.showcase-image.small {
+  min-height: 180px;
+  max-height: 220px;
+  margin-bottom: 1rem;
+}

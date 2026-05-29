@@ -8,11 +8,40 @@ const pages = defineCollection({
     pattern: "**/*.{md,mdx}",
   }),
 
+
+
+
   schema: z.object({
     title: z.string(),
     description: z.string(),
     heroTitle: z.string(),
     heroText: z.string(),
+    heroImage: z.string().optional(),
+    heroImageLabel: z.string().optional(),
+
+
+    sections: z
+      .array(
+        z.object({
+          eyebrow: z.string().optional(),
+          title: z.string(),
+          text: z.string(),
+          image: z.string().optional(),
+          imageLabel: z.string().optional(),
+        })
+      )
+      .optional(),
+
+    cards: z
+      .array(
+        z.object({
+          title: z.string(),
+          text: z.string(),
+          image: z.string().optional(),
+          imageLabel: z.string().optional(),
+        })
+      )
+      .optional(),
 
     resources: z
       .array(
