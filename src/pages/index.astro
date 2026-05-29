@@ -6,37 +6,41 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   title="Cloudflare Astro Demo"
   description="A modern publishing platform for business teams."
 >
-  <section class="home-hero">
-    <div class="hero-orb orb-one"></div>
-    <div class="hero-orb orb-two"></div>
+  <section class="hero-scroll-scene">
+    <div class="home-hero">
+      <div class="hero-orb orb-one"></div>
+      <div class="hero-orb orb-two"></div>
 
-    <div class="home-hero-content">
-      <p class="eyebrow">Astro · Cloudflare · GitHub · Decap CMS</p>
-      <h1>
-        Modern publishing for business teams without handing over the keys.
-      </h1>
-      <p>
-        A fast public website, a simple content editor, secure GitHub-backed
-        publishing, and R2-powered media delivery — all managed through
-        Cloudflare.
-      </p>
+      <div class="home-hero-content">
+        <p class="eyebrow">Astro · Cloudflare · GitHub · Decap CMS</p>
+        <h1>
+          Modern publishing for business teams without handing over the keys.
+        </h1>
+        <p>
+          A fast public website, a simple content editor, secure GitHub-backed
+          publishing, and R2-powered media delivery — all managed through
+          Cloudflare.
+        </p>
 
-      <div class="home-actions">
-        <a href="/astro-review" class="primary-cta">Explore the Architecture</a>
-        <a href="/decap-demo" class="secondary-cta">See CMS Workflow</a>
+        <div class="home-actions">
+          <a href="/astro-review" class="primary-cta"
+            >Explore the Architecture</a
+          >
+          <a href="/decap-demo" class="secondary-cta">See CMS Workflow</a>
+        </div>
       </div>
-    </div>
 
-    <div class="hero-panel">
-      <div class="browser-bar">
-        <span></span><span></span><span></span>
+      <div class="hero-panel">
+        <div class="browser-bar">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="flow-card is-active" data-step="0">
+          Business user edits content
+        </div>
+        <div class="flow-card" data-step="1">Decap commits to GitHub</div>
+        <div class="flow-card" data-step="2">Cloudflare deploys Worker</div>
+        <div class="flow-card" data-step="3">R2 serves media</div>
       </div>
-      <div class="flow-card is-active" data-step="0">
-        Business user edits content
-      </div>
-      <div class="flow-card" data-step="1">Decap commits to GitHub</div>
-      <div class="flow-card" data-step="2">Cloudflare deploys Worker</div>
-      <div class="flow-card" data-step="3">R2 serves media</div>
     </div>
   </section>
 
@@ -120,19 +124,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <script>
+    const scene = document.querySelector(
+      ".hero-scroll-scene",
+    ) as HTMLElement | null;
     const hero = document.querySelector(".home-hero") as HTMLElement | null;
     const flowCards = Array.from(document.querySelectorAll(".flow-card"));
 
     window.addEventListener("scroll", () => {
-      if (!hero) return;
+      if (!scene || !hero || flowCards.length === 0) return;
 
-      const rect = hero.getBoundingClientRect();
-      const progress = Math.min(
-        1,
-        Math.max(0, Math.abs(rect.top) / window.innerHeight),
-      );
+      const rect = scene.getBoundingClientRect();
+      const totalScrollable = scene.offsetHeight - window.innerHeight;
+      const scrolled = Math.min(totalScrollable, Math.max(0, -rect.top));
 
-      hero.style.setProperty("--hero-parallax-y", `${progress * 90}px`);
+      const progress = scrolled / totalScrollable;
+
+      hero.style.setProperty("--hero-parallax-y", `${progress * 140}px`);
 
       const activeIndex = Math.min(
         flowCards.length - 1,
